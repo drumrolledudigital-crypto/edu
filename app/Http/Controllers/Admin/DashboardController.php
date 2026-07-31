@@ -47,6 +47,8 @@ class DashboardController extends Controller
         $pendingPayments = $stats['pendingPayments'];
         $refundedPayments = $stats['refundedPayments'];
         $totalRevenue = $stats['totalRevenue'];
+        $totalBookPurchases = $stats['totalBookPurchases'];
+        $totalBookRevenue = $stats['totalBookRevenue'];
         $pendingRefunds = $stats['pendingRefunds'];
 
         // Recent Activity
@@ -65,7 +67,7 @@ class DashboardController extends Controller
             'totalStudents', 'totalSubjects', 'totalDoubts', 'totalBookings',
             'upcomingSessions', 'completedSessions',
             'totalPayments', 'successfulPayments', 'pendingPayments', 'refundedPayments',
-            'totalRevenue', 'pendingRefunds',
+            'totalRevenue', 'totalBookPurchases', 'totalBookRevenue', 'pendingRefunds',
             'recentStudents', 'recentBookings', 'recentPayments', 'recentRefunds', 'recentDoubts',
             'recentNotifications', 'unreadNotificationsCount', 'recentActivities'
         ));
