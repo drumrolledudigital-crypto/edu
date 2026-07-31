@@ -294,19 +294,6 @@
                 </div>
             </div>
 
-            <!-- Command Search Trigger (Visual) -->
-            <div class="px-4 mt-6">
-                <button class="w-full flex items-center justify-between px-3 py-2 text-xs text-muted-foreground bg-background/50 border border-border rounded-lg hover:bg-background hover:border-border transition-all shadow-sm">
-                    <div class="flex items-center gap-2">
-                        <i data-lucide="search" class="w-3.5 h-3.5"></i>
-                        <span>Search...</span>
-                    </div>
-                    <kbd class="pointer-events-none hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex border-border">
-                        <span class="text-[10px]">⌘</span>K
-                    </kbd>
-                </button>
-            </div>
-
             <nav class="flex-1 overflow-y-auto py-6 px-4 space-y-1.5 scrollbar-hide">
                 <div class="px-3 mb-2 flex items-center justify-between">
                     <span class="text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest">Main Menu</span>
