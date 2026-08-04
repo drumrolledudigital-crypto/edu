@@ -39,6 +39,19 @@
     </div>
 </section>
 
+<!-- 1b. Our Mission -->
+<section class="py-20 px-4 md:px-12 bg-white">
+    <div class="max-w-4xl mx-auto text-center fade-up">
+        <span class="inline-block py-1.5 px-4 rounded-full bg-primary/10 text-primary font-bold text-sm mb-6 tracking-wide uppercase">Our Mission</span>
+        <p class="text-xl md:text-2xl text-secondary font-bold leading-relaxed mb-6">
+            At Drumroll Edu, we believe that every child has the potential to learn, grow, and thrive when provided with the right guidance and resources. Our mission is to make learning engaging, accessible, and enjoyable while building confidence, curiosity, and a lifelong love for education.
+        </p>
+        <p class="text-lg text-gray-600 leading-relaxed">
+            We are an innovative e-learning platform dedicated to supporting children in their academic journey through personalized online tutoring and thoughtfully designed educational resources. By combining expert teaching with high-quality practice materials, we help students develop strong foundational skills and achieve their learning goals at their own pace.
+        </p>
+    </div>
+</section>
+
 <!-- 2. Our Story (Timeline Style) -->
 <section class="py-24 px-4 md:px-12 bg-light relative">
     <div class="max-w-4xl mx-auto">
@@ -82,6 +95,51 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+</section>
+
+<!-- 2b. Online Learning Programs & Practice Books -->
+<section class="py-24 px-4 md:px-12 bg-light">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div class="bg-white rounded-[2.5rem] p-10 shadow-soft border border-gray-50 fade-up">
+            <div class="w-14 h-14 rounded-2xl bg-primary-50 flex items-center justify-center text-primary-500 text-2xl mb-6">
+                <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <h3 class="text-2xl md:text-3xl font-black text-secondary mb-4">Our Online Learning Programs</h3>
+            <p class="text-gray-600 leading-relaxed mb-6">
+                At Drumroll Edu, we offer interactive online tutoring for students up to Year/Grade 8, tailored to meet each child's unique learning needs. Our experienced educators create a supportive and encouraging environment where students feel comfortable asking questions, exploring new concepts, and building confidence in their abilities.
+            </p>
+            <p class="text-secondary font-bold mb-4">Our online sessions focus on:</p>
+            <ul class="space-y-3 text-gray-600 text-sm">
+                <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> Personalized learning plans</li>
+                <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> English and Mathematics support</li>
+                <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> Grammar, vocabulary, reading comprehension, and creative writing</li>
+                <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> Numeracy skills, problem-solving, and mathematical reasoning</li>
+                <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> Homework assistance and exam preparation</li>
+                <li class="flex items-start gap-3"><i class="fas fa-check-circle text-primary mt-1"></i> Skill-building activities that encourage critical thinking and creativity</li>
+            </ul>
+        </div>
+
+        <div class="bg-white rounded-[2.5rem] p-10 shadow-soft border border-gray-50 fade-up" style="transition-delay: 0.1s;">
+            <div class="w-14 h-14 rounded-2xl bg-yellow-50 flex items-center justify-center text-yellow-600 text-2xl mb-6">
+                <i class="fas fa-book-open"></i>
+            </div>
+            <h3 class="text-2xl md:text-3xl font-black text-secondary mb-4">Engaging Practice Books for Young Learners</h3>
+            <p class="text-gray-600 leading-relaxed mb-6">
+                We understand that consistent practice plays a vital role in academic success. That's why we create carefully designed practice books that transform learning into an enjoyable experience.
+            </p>
+            <p class="text-secondary font-bold mb-4">Our practice books are:</p>
+            <ul class="space-y-3 text-gray-600 text-sm">
+                <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent mt-1"></i> Age-appropriate and curriculum-aligned</li>
+                <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent mt-1"></i> Visually engaging and easy to follow</li>
+                <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent mt-1"></i> Designed to reinforce classroom learning</li>
+                <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent mt-1"></i> Filled with interactive exercises and skill-building activities</li>
+                <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent mt-1"></i> Created to strengthen understanding, retention, and confidence</li>
+            </ul>
+            <a href="{{ route('books.index') }}" class="inline-flex items-center gap-2 mt-6 font-bold text-primary hover:text-secondary transition text-sm">
+                Browse Practice Books <i class="fas fa-arrow-right text-xs"></i>
+            </a>
         </div>
     </div>
 </section>
@@ -150,17 +208,19 @@
     
     <div class="max-w-7xl mx-auto relative z-10">
         <div class="text-center mb-16 fade-up">
-            <h2 class="text-4xl md:text-5xl font-black mb-4">What Makes Us <span class="text-primary">Different</span></h2>
+            <h2 class="text-4xl md:text-5xl font-black mb-4">Why Choose <span class="text-primary">Drumroll Edu?</span></h2>
             <p class="text-gray-400 text-lg max-w-2xl mx-auto">We don't just teach; we transform the way children perceive education.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @php
                 $features = [
-                    ['icon' => 'chalkboard-user', 'title' => 'Tailored Sessions', 'desc' => 'No cookie-cutter lessons. Every session adapts to the child’s pace.'],
-                    ['icon' => 'gamepad', 'title' => 'Gamified Practice', 'desc' => 'Homework shouldn\'t be boring. We use interactive tools to make it fun.'],
-                    ['icon' => 'calendar-check', 'title' => 'Flexible Scheduling', 'desc' => 'Book slots that fit your busy family routine effortlessly.'],
-                    ['icon' => 'comments', 'title' => 'Parent Updates', 'desc' => 'Transparent communication and detailed progress reports after sessions.'],
+                    ['icon' => 'user-graduate', 'title' => 'Student-Centred Learning', 'desc' => 'Every session is built around your child\'s pace, interests, and needs.'],
+                    ['icon' => 'chalkboard-user', 'title' => 'Experienced Educators', 'desc' => 'Passionate, qualified mentors who genuinely care about every learner.'],
+                    ['icon' => 'calendar-check', 'title' => 'Flexible Online Learning', 'desc' => 'Learn from anywhere, on a schedule that fits your family.'],
+                    ['icon' => 'book-open', 'title' => 'Thoughtfully Designed Books', 'desc' => 'Engaging, curriculum-aligned practice materials for every subject.'],
+                    ['icon' => 'chart-line', 'title' => 'Progress Monitoring', 'desc' => 'Regular feedback so you always know how your child is growing.'],
+                    ['icon' => 'heart', 'title' => 'Confidence & Creativity', 'desc' => 'A focus on academic growth alongside emotional well-being.'],
                 ];
             @endphp
             @foreach($features as $index => $feature)
@@ -176,49 +236,28 @@
     </div>
 </section>
 
-<!-- 5. Meet Our Educators -->
+<!-- 5. Meet Our Founder -->
 <section class="py-24 px-4 md:px-12 bg-light">
-    <div class="max-w-7xl mx-auto">
+    <div class="max-w-5xl mx-auto">
         <div class="text-center mb-16 fade-up">
-            <h2 class="text-4xl md:text-5xl font-black text-secondary mb-4">Meet Our <span class="text-primary">Educators</span></h2>
-            <p class="text-gray-500 text-lg max-w-2xl mx-auto">Passionate mentors dedicated to bringing out the genius in every child.</p>
+            <h2 class="text-4xl md:text-5xl font-black text-secondary mb-4">About <span class="text-primary">Preeti M</span> ✨</h2>
+            <p class="text-gray-500 text-lg max-w-2xl mx-auto">The passionate mentor behind Drumroll Edu.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <!-- Founder Spotlight -->
-            <div class="md:col-span-3 lg:col-span-1 fade-up">
-                <div class="bg-primary text-white rounded-[2.5rem] p-8 h-full flex flex-col justify-center relative overflow-hidden shadow-soft group">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-700"></div>
-                    <img src="https://i.pravatar.cc/300?img=47" alt="Founder" class="w-24 h-24 rounded-full border-4 border-white/20 mb-6 relative z-10 object-cover">
-                    <h3 class="text-2xl font-black mb-1 relative z-10">Sarah Drumroll</h3>
-                    <p class="text-white/80 font-bold text-sm uppercase tracking-wider mb-6 relative z-10">Founder & Lead Mentor</p>
-                    <p class="text-white/90 italic leading-relaxed relative z-10">"My goal was to create a safe space where children aren't afraid to make mistakes, because that's where true learning begins."</p>
-                </div>
-            </div>
-
-            <!-- Teacher 1 -->
-            <div class="bg-white rounded-card shadow-soft p-6 border border-gray-50 hover:shadow-hover hover:-translate-y-2 transition-all duration-300 fade-up" style="transition-delay: 0.1s;">
-                <div class="w-full h-48 rounded-xl overflow-hidden mb-6 bg-primary-50">
-                    <img src="https://illustrations.popsy.co/blue/creative-work.svg" alt="Math Teacher" class="w-full h-full object-contain p-4">
-                </div>
-                <h3 class="text-xl font-bold text-secondary mb-1">Mr. David</h3>
-                <p class="text-primary text-sm font-bold mb-4">Mathematics Specialist</p>
-                <p class="text-gray-500 text-sm leading-relaxed mb-4">Makes numbers dance! David specializes in visual mathematics and logical reasoning for middle schoolers.</p>
-                <div class="flex items-center gap-2 text-xs font-bold text-gray-400">
-                    <i class="fas fa-graduation-cap"></i> 8 Years Experience
-                </div>
-            </div>
-
-            <!-- Teacher 2 -->
-            <div class="bg-white rounded-card shadow-soft p-6 border border-gray-50 hover:shadow-hover hover:-translate-y-2 transition-all duration-300 fade-up" style="transition-delay: 0.2s;">
-                <div class="w-full h-48 rounded-xl overflow-hidden mb-6 bg-yellow-50">
-                    <img src="https://illustrations.popsy.co/yellow/woman-reading-a-book.svg" alt="English Teacher" class="w-full h-full object-contain p-4">
-                </div>
-                <h3 class="text-xl font-bold text-secondary mb-1">Ms. Elena</h3>
-                <p class="text-accent text-sm font-bold mb-4">English & Phonics</p>
-                <p class="text-gray-500 text-sm leading-relaxed mb-4">A storyteller at heart. Elena helps young readers build vocabulary, grammar, and a lifelong love for books.</p>
-                <div class="flex items-center gap-2 text-xs font-bold text-gray-400">
-                    <i class="fas fa-graduation-cap"></i> 5 Years Experience
+        <div class="bg-primary text-white rounded-[2.5rem] p-10 md:p-14 relative overflow-hidden shadow-soft fade-up">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+            <div class="relative z-10">
+                <h3 class="text-2xl md:text-3xl font-black mb-1">Preeti Matharu</h3>
+                <p class="text-white/80 font-bold text-sm uppercase tracking-wider mb-8">Founder, Drumroll Edu</p>
+                <p class="text-white/90 leading-relaxed mb-4">
+                    With over 10 years of experience in education, Preeti has worked extensively with both national and international students. She began her journey with a specialization in Early Childhood Care and Education (ECCE), and further expanded her expertise by studying Child Psychology.
+                </p>
+                <p class="text-white/90 leading-relaxed">
+                    As a certified Play Therapy Practitioner, Preeti brings creativity and compassion into her practice, helping children express and heal through play. She holds a Master's in Counseling Psychology and is trained in evidence-based approaches such as REBT (Rational Emotive Behavior Therapy) and CBT (Cognitive Behavioral Therapy). Her passion lies in supporting emotional well-being, fostering resilience, and empowering individuals to thrive academically, socially, and personally.
+                </p>
+                <div class="flex flex-wrap gap-4 mt-8 text-sm font-bold">
+                    <a href="tel:+919619759234" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 transition rounded-full px-5 py-3"><i class="fas fa-phone"></i> +91 96197 59234</a>
+                    <a href="mailto:info@drumrolledu.com" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 transition rounded-full px-5 py-3"><i class="fas fa-envelope"></i> info@drumrolledu.com</a>
                 </div>
             </div>
         </div>
@@ -363,6 +402,17 @@
                 <img src="https://illustrations.popsy.co/green/man-reading-a-book.svg" alt="Reading" class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500">
             </div>
         </div>
+    </div>
+</section>
+
+<!-- 9b. Our Vision -->
+<section class="py-24 px-4 md:px-12 bg-white">
+    <div class="max-w-4xl mx-auto text-center fade-up">
+        <span class="inline-block py-1.5 px-4 rounded-full bg-accent/20 text-secondary font-bold text-sm mb-6 tracking-wide uppercase">Our Vision</span>
+        <p class="text-xl md:text-2xl text-secondary font-bold leading-relaxed mb-8">
+            At Drumroll Edu, we envision a world where every child has access to quality education that inspires curiosity, nurtures potential, and celebrates individual growth. We are committed to empowering young learners with the knowledge, skills, and confidence they need to succeed both inside and outside the classroom.
+        </p>
+        <p class="text-lg text-primary font-black">Drumroll Edu — from practice to progress.<br>Big dreams begin with a Drumroll! 🌟</p>
     </div>
 </section>
 
