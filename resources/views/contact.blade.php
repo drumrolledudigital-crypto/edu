@@ -353,41 +353,30 @@
         <!-- Location / Online -->
         <div class="lg:w-1/2 fade-up" style="transition-delay: 0.2s;">
             <div class="bg-light rounded-[2.5rem] p-8 border border-gray-100 shadow-soft relative overflow-hidden">
-                <!-- Map Placeholder (Stylized representation of global reach) -->
+                @php $mapEmbed = \App\Models\Setting::get('google_map_embed'); @endphp
+                @if($mapEmbed)
+                <div class="w-full h-64 rounded-2xl mb-8 overflow-hidden">
+                    <iframe src="{{ $mapEmbed }}" class="w-full h-full border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Our location on Google Maps"></iframe>
+                </div>
+                @else
                 <div class="w-full h-64 bg-primary-50 rounded-2xl mb-8 relative flex items-center justify-center overflow-hidden">
-                    <svg class="w-full h-full opacity-30" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Simplified world map dots -->
-                        <!-- North America -->
-                        <circle cx="80" cy="60" r="3" fill="#3B82F6"/><circle cx="90" cy="55" r="2.5" fill="#3B82F6"/>
-                        <circle cx="75" cy="70" r="2" fill="#3B82F6"/><circle cx="85" cy="65" r="2.5" fill="#3B82F6"/>
-                        <circle cx="95" cy="62" r="2" fill="#3B82F6"/><circle cx="70" cy="62" r="2" fill="#3B82F6"/>
-                        <!-- South America -->
-                        <circle cx="105" cy="120" r="2.5" fill="#3B82F6"/><circle cx="100" cy="130" r="2" fill="#3B82F6"/>
-                        <circle cx="110" cy="125" r="2" fill="#3B82F6"/><circle cx="103" cy="140" r="2.5" fill="#3B82F6"/>
-                        <!-- Europe -->
-                        <circle cx="190" cy="50" r="2.5" fill="#3B82F6"/><circle cx="200" cy="48" r="2" fill="#3B82F6"/>
-                        <circle cx="195" cy="55" r="2" fill="#3B82F6"/><circle cx="205" cy="52" r="2.5" fill="#3B82F6"/>
-                        <!-- Africa -->
-                        <circle cx="200" cy="90" r="2.5" fill="#3B82F6"/><circle cx="195" cy="100" r="2" fill="#3B82F6"/>
-                        <circle cx="205" cy="95" r="2" fill="#3B82F6"/><circle cx="200" cy="110" r="2.5" fill="#3B82F6"/>
-                        <!-- Asia -->
-                        <circle cx="260" cy="55" r="3" fill="#3B82F6"/><circle cx="270" cy="50" r="2.5" fill="#3B82F6"/>
-                        <circle cx="280" cy="60" r="2" fill="#3B82F6"/><circle cx="290" cy="55" r="2.5" fill="#3B82F6"/>
-                        <circle cx="265" cy="65" r="2" fill="#3B82F6"/><circle cx="275" cy="70" r="2" fill="#3B82F6"/>
-                        <circle cx="255" cy="48" r="2" fill="#3B82F6"/><circle cx="285" cy="48" r="2" fill="#3B82F6"/>
-                        <!-- India highlight -->
-                        <circle cx="265" cy="80" r="4" fill="#FF4D8D" opacity="0.8"/>
-                        <circle cx="265" cy="80" r="7" fill="#FF4D8D" opacity="0.2"/>
-                        <!-- Australia -->
-                        <circle cx="320" cy="120" r="2.5" fill="#3B82F6"/><circle cx="330" cy="118" r="2" fill="#3B82F6"/>
-                        <circle cx="325" cy="125" r="2" fill="#3B82F6"/>
-                    </svg>
-                    <div class="absolute bg-white/90 backdrop-blur-sm py-2 px-4 rounded-xl shadow-sm font-bold text-secondary flex items-center gap-2">
+                    <div class="bg-white/90 backdrop-blur-sm py-2 px-4 rounded-xl shadow-sm font-bold text-secondary flex items-center gap-2">
                         <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span> Classes Available Worldwide
                     </div>
                 </div>
-                <h3 class="text-2xl font-black text-secondary mb-3">100% Online, 100% Engaging</h3>
+                @endif
+                <h3 class="text-2xl font-black text-secondary mb-3">Visit Us or Join Online</h3>
+                @php $address = \App\Models\Setting::get('address'); @endphp
+                @if($address)
+                <p class="text-gray-500 text-sm leading-relaxed mb-2"><i class="fas fa-map-marker-alt text-primary mr-2"></i>{{ $address }}</p>
+                @endif
                 <p class="text-gray-500 text-sm leading-relaxed">No matter where you are located, Drumroll brings the best educators right to your living room. Experience seamless interactive learning without the commute.</p>
+                @php $mapUrl = \App\Models\Setting::get('google_map_url'); @endphp
+                @if($mapUrl)
+                <a href="{{ $mapUrl }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 mt-4 font-bold text-primary hover:text-secondary transition text-sm">
+                    Get Directions <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+                @endif
             </div>
         </div>
     </div>
