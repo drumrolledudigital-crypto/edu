@@ -76,7 +76,7 @@ class WebsiteSettingsController extends Controller
             abort(422, 'Invalid image format. Allowed: ' . implode(', ', $allowed));
         }
 
-        $maxSize = in_array($key, ['favicon', 'apple_touch_icon']) ? 512 : 2048;
+        $maxSize = in_array($key, ['favicon', 'apple_touch_icon']) ? 512 : 5120;
         if ($file->getSize() > $maxSize * 1024) {
             abort(422, "Image must be less than {$maxSize}KB.");
         }
@@ -137,7 +137,8 @@ class WebsiteSettingsController extends Controller
         if ($group === 'branding') {
             foreach (self::IMAGE_KEYS['branding'] ?? [] as $imageKey) {
                 if ($request->hasFile($imageKey)) {
-                    $rules[$imageKey] = 'image|max:2048';
+                    $maxKb = $imageKey === 'favicon' ? 512 : 5120;
+                    $rules[$imageKey] = "image|max:{$maxKb}";
                 }
             }
         }
