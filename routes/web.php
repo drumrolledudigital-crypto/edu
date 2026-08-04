@@ -36,6 +36,17 @@ Route::get('/terms-conditions', [PageController::class, 'termsConditions'])->nam
 Route::get('/refund-policy', [PageController::class, 'refundPolicy'])->name('refund.policy');
 Route::get('/cancellation-policy', [PageController::class, 'cancellationPolicy'])->name('cancellation.policy');
 
+// Serves files from the public storage disk directly through Laravel.
+// Avoids depending on the public/storage symlink, which some shared hosts
+// either fail to create on deploy or block the symlink() function for.
+Route::get('/storage/{path}', function (string $path) {
+    if (!\Illuminate\Support\Facades\Storage::disk('public')->exists($path)) {
+        abort(404);
+    }
+
+    return \Illuminate\Support\Facades\Storage::disk('public')->response($path);
+})->where('path', '.*')->name('storage.serve');
+
 Route::prefix('student')->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('/register', [PageController::class, 'register'])->name('student.register');
