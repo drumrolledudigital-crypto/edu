@@ -279,6 +279,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         Route::post('/settings/smtp-test', [SettingsController::class, 'sendTestEmail'])->name('admin.settings.smtp-test');
         Route::get('/website-settings', [\App\Http\Controllers\Admin\WebsiteSettingsController::class, 'index'])->name('admin.website-settings.index');
         Route::post('/website-settings', [\App\Http\Controllers\Admin\WebsiteSettingsController::class, 'update'])->name('admin.website-settings.update');
+        Route::post('/website-settings/upload-image', [\App\Http\Controllers\Admin\WebsiteSettingsController::class, 'uploadImageAjax'])->name('admin.website-settings.upload-image');
     });
 
     // Audit Logs

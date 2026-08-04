@@ -96,36 +96,34 @@
                     <div class="col-span-2">
                         <label class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2 block">Website Logo</label>
                         <div class="flex items-center gap-4">
-                            @if(!empty($settings['website_logo']))
-                            <div class="w-24 h-24 rounded-lg border border-border bg-muted/30 flex items-center justify-center overflow-hidden">
+                            <div id="preview-website_logo" class="w-24 h-24 rounded-lg border {{ !empty($settings['website_logo']) ? 'border-border' : 'border-dashed border-border' }} bg-muted/30 flex items-center justify-center overflow-hidden">
+                                @if(!empty($settings['website_logo']))
                                 <img src="{{ asset($settings['website_logo']) }}" alt="Website Logo" class="max-w-full max-h-full object-contain">
-                            </div>
-                            @else
-                            <div class="w-24 h-24 rounded-lg border border-dashed border-border bg-muted/30 flex items-center justify-center">
+                                @else
                                 <i data-lucide="image" class="w-8 h-8 text-muted-foreground/50"></i>
+                                @endif
                             </div>
-                            @endif
                             <div class="flex-1">
-                                <input type="file" name="website_logo" accept="image/*" class="w-full text-sm text-muted-foreground file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 file:cursor-pointer">
-                                <p class="text-[10px] text-muted-foreground mt-1">Used in header, footer, login, emails, invoices, and PDFs.</p>
+                                <input type="file" data-instant-upload="website_logo" accept="image/*" class="w-full text-sm text-muted-foreground file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 file:cursor-pointer">
+                                <p class="text-[10px] text-muted-foreground mt-1">Used in header, footer, login, emails, invoices, and PDFs. Uploads instantly, up to 5MB.</p>
+                                <p id="status-website_logo" class="text-[11px] mt-1 font-semibold"></p>
                             </div>
                         </div>
                     </div>
                     <div class="col-span-2">
                         <label class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2 block">Favicon</label>
                         <div class="flex items-center gap-4">
-                            @if(!empty($settings['favicon']))
-                            <div class="w-12 h-12 rounded-lg border border-border bg-muted/30 flex items-center justify-center overflow-hidden">
+                            <div id="preview-favicon" class="w-12 h-12 rounded-lg border {{ !empty($settings['favicon']) ? 'border-border' : 'border-dashed border-border' }} bg-muted/30 flex items-center justify-center overflow-hidden">
+                                @if(!empty($settings['favicon']))
                                 <img src="{{ asset($settings['favicon']) }}" alt="Favicon" class="max-w-full max-h-full object-contain">
-                            </div>
-                            @else
-                            <div class="w-12 h-12 rounded-lg border border-dashed border-border bg-muted/30 flex items-center justify-center">
+                                @else
                                 <i data-lucide="image" class="w-5 h-5 text-muted-foreground/50"></i>
+                                @endif
                             </div>
-                            @endif
                             <div class="flex-1">
-                                <input type="file" name="favicon" accept="image/x-icon,image/png,image/svg+xml" class="w-full text-sm text-muted-foreground file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 file:cursor-pointer">
-                                <p class="text-[10px] text-muted-foreground mt-1">Browser tab icon. Recommended: 32x32 or 64x64 PNG/ICO.</p>
+                                <input type="file" data-instant-upload="favicon" accept="image/x-icon,image/png,image/svg+xml" class="w-full text-sm text-muted-foreground file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 file:cursor-pointer">
+                                <p class="text-[10px] text-muted-foreground mt-1">Browser tab icon. Recommended: 32x32 or 64x64 PNG/ICO. Uploads instantly, up to 512KB.</p>
+                                <p id="status-favicon" class="text-[11px] mt-1 font-semibold"></p>
                             </div>
                         </div>
                     </div>
@@ -362,6 +360,57 @@
             }
         });
     }
+
+    document.querySelectorAll('[data-instant-upload]').forEach(function(input) {
+        input.addEventListener('change', function() {
+            const field = input.getAttribute('data-instant-upload');
+            const file = input.files[0];
+            if (!file) return;
+
+            const statusEl = document.getElementById('status-' + field);
+            const previewEl = document.getElementById('preview-' + field);
+            statusEl.textContent = 'Uploading...';
+            statusEl.className = 'text-[11px] mt-1 font-semibold text-muted-foreground';
+            input.disabled = true;
+
+            const formData = new FormData();
+            formData.append('field', field);
+            formData.append(field, file);
+
+            fetch(@json(route('admin.website-settings.upload-image')), {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Accept': 'application/json',
+                },
+                body: formData,
+            })
+            .then(function(res) { return res.json().then(function(data) { return { ok: res.ok, data: data }; }); })
+            .then(function(result) {
+                if (result.ok && result.data.success) {
+                    previewEl.innerHTML = '<img src="' + result.data.url + '?t=' + Date.now() + '" alt="' + field + '" class="max-w-full max-h-full object-contain">';
+                    previewEl.classList.remove('border-dashed');
+                    statusEl.textContent = 'Uploaded';
+                    statusEl.className = 'text-[11px] mt-1 font-semibold text-emerald-600';
+                    if (window.toast) window.toast.success((field === 'favicon' ? 'Favicon' : 'Website logo') + ' uploaded successfully.');
+                } else {
+                    const message = (result.data.errors && result.data.errors[field] && result.data.errors[field][0]) || result.data.message || 'Upload failed.';
+                    statusEl.textContent = message;
+                    statusEl.className = 'text-[11px] mt-1 font-semibold text-rose-600';
+                    if (window.toast) window.toast.error(message);
+                }
+            })
+            .catch(function() {
+                statusEl.textContent = 'Upload failed. Please try again.';
+                statusEl.className = 'text-[11px] mt-1 font-semibold text-rose-600';
+                if (window.toast) window.toast.error('Upload failed. Please try again.');
+            })
+            .finally(function() {
+                input.disabled = false;
+                input.value = '';
+            });
+        });
+    });
 </script>
 @endpush
 @endsection

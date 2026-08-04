@@ -67,6 +67,28 @@ class WebsiteSettingsController extends Controller
         return back()->with('success', ucfirst($group) . ' settings updated successfully.');
     }
 
+    public function uploadImageAjax(Request $request)
+    {
+        $field = $request->input('field');
+
+        if (!in_array($field, self::IMAGE_KEYS['branding'] ?? [], true)) {
+            return response()->json(['success' => false, 'message' => 'Invalid field.'], 422);
+        }
+
+        $maxKb = $field === 'favicon' ? 512 : 5120;
+
+        $request->validate([
+            $field => "required|image|max:{$maxKb}",
+        ]);
+
+        $path = $this->uploadImage($request->file($field), $field);
+        $this->deleteOldImage($field);
+        Setting::set($field, $path, 'branding');
+        $this->clearCache();
+
+        return response()->json(['success' => true, 'url' => asset($path)]);
+    }
+
     public function uploadImage(\Illuminate\Http\UploadedFile $file, string $key)
     {
         $allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'ico'];
