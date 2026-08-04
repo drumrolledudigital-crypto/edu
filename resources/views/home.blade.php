@@ -44,13 +44,17 @@
 
         <!-- Hero Right -->
         <div class="relative fade-up" style="transition-delay: 0.2s">
-            <div class="relative z-10 w-full aspect-square max-w-[550px] mx-auto rounded-full bg-primary/5 flex items-end justify-center p-8 border-4 border-white shadow-soft">
-                <img src="https://illustrations.popsy.co/pink/remote-work.svg" alt="Student Learning" class="w-[85%] h-auto animate-float">
-                
+            <div class="relative z-10 w-full aspect-square max-w-[550px] mx-auto">
+                <div class="w-full h-full rounded-full overflow-hidden bg-primary/5 border-4 border-white shadow-soft">
+                    <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                        <source src="{{ asset('website/' . rawurlencode('banner video.mp4')) }}" type="video/mp4">
+                    </video>
+                </div>
+
                 <!-- Decorative Elements -->
                 <div class="absolute -top-10 -right-10 w-32 h-32 bg-accent/20 rounded-full blur-2xl"></div>
                 <div class="absolute -bottom-10 -left-10 w-48 h-48 bg-primary/10 rounded-full blur-3xl"></div>
-                
+
                 <!-- Floating Icons -->
                 <div class="absolute top-[15%] left-0 w-14 h-14 bg-white rounded-2xl shadow-soft flex items-center justify-center text-primary animate-float" style="animation-delay: 0.5s">
                     <i class="fas fa-book text-2xl"></i>
