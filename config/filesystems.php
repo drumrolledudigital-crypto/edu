@@ -40,7 +40,13 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            // On hosts where Git auto-deploy resets/re-clones the deployed directory
+            // (wiping gitignored files like uploads), set UPLOADS_OUTSIDE_DEPLOY=true
+            // in .env to store uploads one level above the project root instead,
+            // where a git-based deploy can't reach them.
+            'root' => env('UPLOADS_OUTSIDE_DEPLOY', false)
+                ? dirname(base_path()).'/drumroll-uploads'
+                : storage_path('app/public'),
             'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage',
             'visibility' => 'public',
             'throw' => false,
